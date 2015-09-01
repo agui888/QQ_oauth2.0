@@ -16,22 +16,22 @@ lua-nginx-module
 
 #Configuration
 
-server {
-	location /qq {
-            default_type 'text/plain; charset=utf-8';
+	server {
+		location /qq {
+			default_type 'text/plain; charset=utf-8';
 
-            set $client_id      'your_id';
-            set $client_secret	'your_secret';
-            set $redirect_uri   'http://your redirect uri';
+			set $client_id      'your_id';
+			set $client_secret	'your_secret';
+			set $redirect_uri   'http://your redirect uri';
 
-            access_by_lua_file '/path/of/qq_oauth.lua';
-        }
+			access_by_lua_file '/path/of/qq_oauth.lua';
+		}
 
-        location QQ {
-            internal;
-            proxy_set_header   Accept-Encoding ''; #close gzip 
+		location QQ {
+			internal;
+			proxy_set_header   Accept-Encoding ''; #close gzip 
 
-            rewrite ^QQ(.*) $1 break;
-            proxy_pass https://graph.qq.com;
-        }
-}
+			rewrite ^QQ(.*) $1 break;
+			proxy_pass https://graph.qq.com;
+		}
+	}
